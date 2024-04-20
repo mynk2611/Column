@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { PrismaClient } from "@prisma/client/extension";
+import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { sign } from "hono/jwt";
 
@@ -18,7 +18,7 @@ userAuth.post('/signup', async(c)=>{
      const body = await c.req.json();
      
      try{
-            const existUser = await prisma.Column_User.findUnique({
+            const existUser = await prisma.column_User.findUnique({
                 where : {
                     email : body.email,
                 }
@@ -32,7 +32,7 @@ userAuth.post('/signup', async(c)=>{
             }
 
 
-            const user = await prisma.Column_User.create({
+            const user = await prisma.column_User.create({
                 data : {
                     name : body.name,
                     email : body.email,
