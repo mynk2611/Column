@@ -55,7 +55,41 @@ userAuth.post('/signup', async(c)=>{
      }
 })
 userAuth.post('/login', async(c)=>{
- 
+  const prisma = new PrismaClient({
+    datasourceUrl : c.env.DATABASE_URL
+  }).$extends(withAccelerate());
+
+  const body = await c.req.json();
+
+  try{
+        const user = await prisma.column_User.findFirst({
+            where : {
+                email : body.email,
+                password : body.password
+            }
+        })
+                if(!user){
+                    c.status(403)
+                    return c.json({
+                        message : "User not exist"
+                    })
+                }
+
+        const token = await sign({id : user.id}, c.env.JWT_SECRET);
+
+        return c.json({
+            token
+        })
+
+  }
+  catch(error){
+        console.log("Error while login", error)
+
+        c.status(500)
+        return c.json({
+            message : "Error while login"
+        })
+  }
 })
 
 export default userAuth;
