@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { sign } from "hono/jwt";
+import { signupSchema, loginSchema } from "@mame_26_11/column-common";
 
 const userAuth = new Hono<{
     Bindings : {
@@ -11,11 +12,20 @@ const userAuth = new Hono<{
 }>();
 
 userAuth.post('/signup', async(c)=>{
+    const body = await c.req.json();
+    const { success } = signupSchema.safeParse(body);
+
+        if(!success){
+            c.status(411)
+            return c.json({
+                message : "Incorrect inputs"
+            })
+        }
+
      const prisma = new PrismaClient({
         datasourceUrl : c.env.DATABASE_URL
      }).$extends(withAccelerate())
 
-     const body = await c.req.json();
      
      try{
             const existUser = await prisma.column_User.findUnique({
@@ -55,11 +65,20 @@ userAuth.post('/signup', async(c)=>{
      }
 })
 userAuth.post('/login', async(c)=>{
+    const body = await c.req.json();
+    const { success } = loginSchema.safeParse(body);
+
+        if(!success){
+            c.status(411);
+            return c.json({
+                message: "Incorrect inputs"
+            })
+        }
+
   const prisma = new PrismaClient({
     datasourceUrl : c.env.DATABASE_URL
   }).$extends(withAccelerate());
 
-  const body = await c.req.json();
 
   try{
         const user = await prisma.column_User.findFirst({
