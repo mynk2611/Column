@@ -53,14 +53,88 @@ column.use('/*', async(c, next)=>{
 
 column.post('/', async (c) => {
     const prisma = c.get('prisma')
+    const authorId = c.get('userId')
+
+    const body = await c.req.json();
+
+    try{
+        const column = await prisma.column.create({
+            data : {
+                title : body.title,
+                content : body.content,
+                published : true,
+                author_id : authorId,
+            }
+        })
+
+        return c.json({
+            id : column.id,
+        })
+
+    }
+    catch(error){
+        console.log("Error while creating column", error);
+        c.status(500)
+        return c.json({
+            message : "Error while creating column"
+        })        
+    }
 })
 
-column.post('/', async (c) => {
+column.put('/', async (c) => {
     const prisma = c.get('prisma')
+
+    const body = await c.req.json();
+
+    try {
+        const column = await prisma.column.update({
+            where : {
+                id : body.id
+            },
+            data : {
+                title : body.title,
+                content : body.content,
+            }
+        })
+
+        return c.json({
+            id : column.id,
+        })
+    }
+    catch(error){
+        console.log("Error while updating" , error);
+        c.status(500)
+        return c.json({
+            message : "Internal server error"
+        })
+    }
 })
 
 column.post('/bulk', async (c) => {
     const prisma = c.get('prisma')
+    const authorId = c.get('userId')
+
+    try{
+        const columns = await prisma.column.findMany({
+            select : {
+                id : true,
+                title : true,
+                content : true,
+                user : {
+                    select : {
+                        name : true
+                    }
+                }
+            }
+        })
+    }
+    catch(error){
+        console.log("Error while fetching the data", error);
+        c.status(411)
+        return c.json({
+            message : "Internal server error"
+        })
+    }
 })
 
 // column.post('/:author-name', async (c) => {
@@ -69,6 +143,38 @@ column.post('/bulk', async (c) => {
 
 column.post('/:id', async (c) => {
     const prisma = c.get('prisma')
+    const authorId = c.get('userId');
+
+    const targetId = c.req.param("id");
+
+    try{
+        const column = await prisma.column.findFirst({
+            where : {
+                id : targetId,
+            },
+            select : {
+                id : true,
+                title : true,
+                content : true,
+                user : {
+                    select : {
+                        name : true,
+                    }
+                }
+            }
+        })
+        
+        return c.json({
+            column,
+        })
+    }
+    catch(error){
+        console.log("Error while fetching data", error);
+        c.status(411)
+        return c.json({
+            message : "Internal server error"
+        })
+    }
 })
 
 export default column;
