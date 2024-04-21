@@ -7,9 +7,11 @@ exports.loginSchema = exports.signupSchema = void 0;
 const zod_1 = __importDefault(require("zod"));
 exports.signupSchema = zod_1.default.object({
     name: zod_1.default.string()
+        .trim()
         .min(1, { message: "Name is required" })
         .max(100, { message: "Name must be of 100 character or fewer" }),
     email: zod_1.default.string()
+        .trim()
         .email({ message: "Invalid email address" }),
     password: zod_1.default.string()
         .min(8, { message: "Password must be at least 8 characters long" })
@@ -17,7 +19,9 @@ exports.signupSchema = zod_1.default.object({
         .regex(/[A-Z]/, { message: "Password must contain at least one uppercase character" })
         .regex(/[1-9]/, { message: "Password must contain at least one number" }),
     bio: zod_1.default.string()
-        .max(100, { message: "Bio must be 160 characters or fewer" }),
+        .trim()
+        .max(100, { message: "Bio must be 160 characters or fewer" })
+        .default("No bio provided")
 });
 exports.loginSchema = zod_1.default.object({
     email: zod_1.default.string()

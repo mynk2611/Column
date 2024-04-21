@@ -3,7 +3,7 @@ export declare const signupSchema: z.ZodObject<{
     name: z.ZodString;
     email: z.ZodString;
     password: z.ZodString;
-    bio: z.ZodString;
+    bio: z.ZodDefault<z.ZodString>;
 }, "strip", z.ZodTypeAny, {
     name: string;
     email: string;
@@ -13,7 +13,7 @@ export declare const signupSchema: z.ZodObject<{
     name: string;
     email: string;
     password: string;
-    bio: string;
+    bio?: string | undefined;
 }>;
 export type SignupInput = z.infer<typeof signupSchema>;
 export declare const loginSchema: z.ZodObject<{
