@@ -9,8 +9,9 @@ const column = new Hono<{
         DATABASE_URL : string,
         JWT_SECRET : string,
     },
-    Variables : {
+    Variables :   {
         userId : string,
+        prisma : PrismaClient,
     }
 }>();
 
@@ -39,36 +40,35 @@ column.use('/*', async (c, next)=>{
         });
    }
     
-})  
+})
 
-column.post('/', async (c) => {
+column.use('/*', async(c, next)=>{
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL,
-    }).$extends(withAccelerate());
+    }).$extends(withAccelerate()) as unknown as PrismaClient;
+    
+    c.set('prisma', prisma)
+    await next();
 })
 
 column.post('/', async (c) => {
-    const prisma = new PrismaClient({
-        datasourceUrl: c.env.DATABASE_URL,
-    }).$extends(withAccelerate());
+    const prisma = c.get('prisma')
+})
+
+column.post('/', async (c) => {
+    const prisma = c.get('prisma')
 })
 
 column.post('/bulk', async (c) => {
-    const prisma = new PrismaClient({
-        datasourceUrl: c.env.DATABASE_URL,
-    }).$extends(withAccelerate());
+    const prisma = c.get('prisma')
 })
 
-column.post('/:author-name', async (c) => {
-    const prisma = new PrismaClient({
-        datasourceUrl: c.env.DATABASE_URL,
-    }).$extends(withAccelerate());
-})
+// column.post('/:author-name', async (c) => {
+//     const prisma = c.get('prisma')
+// })
 
 column.post('/:id', async (c) => {
-    const prisma = new PrismaClient({
-        datasourceUrl: c.env.DATABASE_URL,
-    }).$extends(withAccelerate());
+    const prisma = c.get('prisma')
 })
 
 export default column;

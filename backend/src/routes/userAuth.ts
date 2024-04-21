@@ -8,8 +8,20 @@ const userAuth = new Hono<{
     Bindings : {
       DATABASE_URL : string,
       JWT_SECRET : string   
+    },
+    Variables : {
+        prisma : PrismaClient,
     }
 }>();
+
+userAuth.use('/*', async(c, next)=>{
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate()) as unknown as PrismaClient;
+    
+    c.set('prisma', prisma)
+    await next();
+})
 
 userAuth.post('/signup', async(c)=>{
     const body = await c.req.json();
@@ -22,10 +34,7 @@ userAuth.post('/signup', async(c)=>{
             })
         }
 
-     const prisma = new PrismaClient({
-        datasourceUrl : c.env.DATABASE_URL
-     }).$extends(withAccelerate())
-
+     const prisma = c.get("prisma");
      
      try{
             const existUser = await prisma.column_User.findUnique({
@@ -75,10 +84,7 @@ userAuth.post('/login', async(c)=>{
             })
         }
 
-  const prisma = new PrismaClient({
-    datasourceUrl : c.env.DATABASE_URL
-  }).$extends(withAccelerate());
-
+        const prisma = c.get("prisma");
 
   try{
         const user = await prisma.column_User.findFirst({
