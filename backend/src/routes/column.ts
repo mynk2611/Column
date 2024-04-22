@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { verify } from "hono/jwt";
+import { columnSchema } from "@mame_26_11/column-common"
 
 
 const column = new Hono<{
@@ -52,10 +53,11 @@ column.use('/*', async(c, next)=>{
 })
 
 column.post('/', async (c) => {
+    const body = await c.req.json();
+    const {success} = columnSchema.safeParse(body)
     const prisma = c.get('prisma')
     const authorId = c.get('userId')
 
-    const body = await c.req.json();
 
     try{
         const column = await prisma.column.create({
