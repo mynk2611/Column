@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { verify } from "hono/jwt";
-import { columnSchema } from "@mame_26_11/column-common"
+import { columnSchema, updateColumnSchema } from "@mame_26_11/column-common"
 
 
 const column = new Hono<{
@@ -55,6 +55,13 @@ column.use('/*', async(c, next)=>{
 column.post('/', async (c) => {
     const body = await c.req.json();
     const {success} = columnSchema.safeParse(body)
+
+        if(!success){
+            c.status(400);
+            return c.json({
+                message : "Wrong inputs",
+            })
+        }
     const prisma = c.get('prisma')
     const authorId = c.get('userId')
 
@@ -84,9 +91,17 @@ column.post('/', async (c) => {
 })
 
 column.put('/', async (c) => {
+    const body = await c.req.json();
+    const {success} = updateColumnSchema.safeParse(body);
+         
+        if(!success){
+            c.status(400);
+            return c.json({
+                message : "Wrong inputs",
+            })
+        }
     const prisma = c.get('prisma')
 
-    const body = await c.req.json();
 
     try {
         const column = await prisma.column.update({
@@ -128,6 +143,10 @@ column.post('/bulk', async (c) => {
                     }
                 }
             }
+        })
+
+        return c.json({
+            columns
         })
     }
     catch(error){
