@@ -27,3 +27,28 @@ export declare const loginSchema: z.ZodObject<{
     password: string;
 }>;
 export type LoginInput = z.infer<typeof loginSchema>;
+export declare const columnSchema: z.ZodObject<{
+    title: z.ZodString;
+    content: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    content: string;
+}, {
+    title: string;
+    content: string;
+}>;
+export type ColumnInput = z.infer<typeof columnSchema>;
+export declare const updateColumnSchema: z.ZodObject<{
+    id: z.ZodString;
+    title: z.ZodString;
+    content: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    content: string;
+    id: string;
+}, {
+    title: string;
+    content: string;
+    id: string;
+}>;
+export type UpdateColumnInput = z.infer<typeof updateColumnSchema>;
