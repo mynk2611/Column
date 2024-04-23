@@ -10,9 +10,9 @@ export const AuthSignup = ()=>{
                     <div className="text-4xl font-normal text-center">
                         Join Us!
                     </div>
-                    <div className="text-center text-gray-600 mt-2">
+                    <div className="text-center text-gray-600 mt-2 font-medium">
                         Already have an account? 
-                        <Link className="ml-2 underline text-green-700 hover:text-green-800 font-medium" to={"/login"}>
+                        <Link className="ml-2 underline text-green-700 hover:text-green-800 font-extrabold" to={"/login"}>
                             Login
                         </Link>
                     </div>
