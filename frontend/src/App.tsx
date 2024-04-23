@@ -8,8 +8,8 @@ function App() {
   return (
     <BrowserRouter>
         <Routes>
-            <Route path="/sinup" element={<Signup />}/>
-            <Route path="/signin" element={<Login />}/>
+            <Route path="/signup" element={<Signup />}/>
+            <Route path="/login" element={<Login />}/>
             <Route path="/bulk" element={<Bulk />}/>
         </Routes>
     </BrowserRouter>
