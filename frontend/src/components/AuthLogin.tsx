@@ -1,8 +1,17 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { LabeledInput } from "./LabeledInput"
 import { Button } from "./Button"
+import { useState } from "react"
+import { LoginInput } from "@mame_26_11/column-common"
+import axios from "axios"
+import { BACKEND_URL } from "../config"
 
 export const AuthLogin = () => {
+    const navigation = useNavigate();
+    const [loginInput, setLoginInput] = useState<LoginInput>({
+        email: "",
+        password: ""
+    })
     return (
         <div>
             <div className="flex flex-col h-screen justify-center">
@@ -17,9 +26,25 @@ export const AuthLogin = () => {
                                 Sinup
                             </Link>
                         </div>
-                        <LabeledInput title="Email" placeholder="abc@exmaple.com"/>
-                        <LabeledInput title="Password" placeholder="Enter your passowrd"/>
-                        <Button title="Login"/>
+                        <LabeledInput title="Email" placeholder="abc@exmaple.com" onChange={(e)=>{
+                            setLoginInput({
+                                ...loginInput,
+                                email : e.target.value,
+                            })
+                        }}/>
+                        <LabeledInput title="Password" placeholder="Enter your passowrd" onChange={(e)=>{
+                            setLoginInput({
+                                ...loginInput,
+                                password : e.target.value,
+                            })
+                        }}/>
+                        <Button onclick={async()=>{
+                            const responce = await axios.post(`${BACKEND_URL}/api/v1/user/login`, loginInput)
+                                const jwt = responce.data;
+                                localStorage.setItem("token", jwt)
+                                navigation("/bulk")                               
+                        }} 
+                        title="Login"/>
                     </div>
                 </div>
             </div>
