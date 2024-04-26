@@ -62,7 +62,7 @@ userAuth.post('/signup', async(c)=>{
 
             const token = await sign({ id : user.id}, c.env.JWT_SECRET)
 
-            return c.text(token);
+            return c.json({token});
      }
      catch(error){
         console.error("Error while signup", error);
