@@ -60,8 +60,8 @@ export const AuthSignup = () => {
                         try{
 
                         const responce = await axios.post(`${BACKEND_URL}/api/v1/user/signup`,signupInput)
-                            const jwt = responce.data;
-                            localStorage.setItem("token", jwt)
+                            const { token } = responce.data;
+                            localStorage.setItem("token", JSON.stringify(token))
                             navigate("/bulk")                      
                         }
                         catch(error){

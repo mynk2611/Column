@@ -40,8 +40,8 @@ export const AuthLogin = () => {
                         }}/>
                         <Button onclick={async()=>{
                             const responce = await axios.post(`${BACKEND_URL}/api/v1/user/login`, loginInput)
-                                const jwt = responce.data;
-                                localStorage.setItem("token", jwt)
+                                const { token} = responce.data;
+                                localStorage.setItem("token", JSON.stringify(token))
                                 navigation("/bulk")                               
                         }} 
                         title="Login"/>
