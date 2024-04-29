@@ -24,7 +24,7 @@ export const Columns = () => {
                         author_name={column.user.name}
                         title={column.title}
                         content={column.content}
-                        // id = {column.id}
+                        id = {column.id}
                     />
                     )}   
             </div>
