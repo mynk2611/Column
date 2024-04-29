@@ -189,6 +189,7 @@ column.use('/*', async(c, next)=>{
                     user : {
                         select : {
                             name : true,
+                            bio : true
                         }
                     }
                 }

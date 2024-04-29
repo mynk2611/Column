@@ -7,6 +7,7 @@ export interface uniCol {
     "title" : string;
     "user" : {
         "name" : string;
+        "bio" : string;
     }
     "id" : string; 
 }
