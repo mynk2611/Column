@@ -10,7 +10,7 @@ interface columnThing {
 export const Column = ({ author_name, title, content, id }: columnThing) => {
     return (
         <div className="flex justify-center ">
-            <Link to={`/Column/${id}`}>
+            <Link to={`/column/${id}`}>
             <div className="w-full max-w-4xl p-4 border-b border-gray-200 shadow-md shadow-gray-500/50">
                 <div className="flex ">
                     <div className="w-8 h-8 rounded-full flex items-center justify-center bg-slate-200">
