@@ -3,6 +3,7 @@ import { Signup } from "./pages/Signup"
 import { Login } from "./pages/Login"
 import { Columns } from "./pages/Columns"
 import { UniqueCol } from "./pages/UniqueCol"
+import { Publish } from "./pages/Publish"
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
             <Route path="/login" element={<Login />}/>
             <Route path="/bulk" element={<Columns />}/>
             <Route path="/column/:id" element={<UniqueCol/>} />
+            <Route path="/publish" element={<Publish />} />
         </Routes>
     </BrowserRouter>
   )

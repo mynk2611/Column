@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export const AppBar = () => {
     return (
         <div className="border-b border-gray-300 mb-4">
@@ -5,12 +7,15 @@ export const AppBar = () => {
 
                 <div className="flex flex-col justify-center">
                     <div className="ml-12 text-3xl font-light">
-                        Column
+                        <Link to={`/bulk`}>
+                            Column
+                        </Link>
                     </div>
                 </div>
 
                 <div className="flex justify-normal mr-20">
                     <div className="flex flex-col justify-center">
+                        <Link to={`/publish`}>
                         <button className="flex items-center justify-center bg-white hover:text-gray-900 text-gray-500  mr-7 ">
                             <span className="mr-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
@@ -19,6 +24,7 @@ export const AppBar = () => {
                             </span>
                             Write
                         </button>
+                        </Link>
                     </div>
                     <div className="flex flex-col justify-center">
                         <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-xl font-medium cursor-pointer">
