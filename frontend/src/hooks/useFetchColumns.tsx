@@ -11,9 +11,18 @@ interface column {
     }
 }
 
+export interface myInfoGen {
+    "id" : string;
+    "name" : string;
+    "bio" : string;
+    "email" : string;
+}
+
 export const useFetchColumns = ()=>{
+
     const [loading, setLoading] = useState(true);
     const [columns, setColumns] = useState<column[]>([])
+    const [myInfo, setMyInfo] = useState<myInfoGen | undefined>();
 
     useEffect(()=>{
         const token = JSON.parse(localStorage.getItem("token") || "{}");
@@ -25,6 +34,7 @@ export const useFetchColumns = ()=>{
 
             .then((Response)=>{
                 setColumns(Response.data.columns);
+                setMyInfo(Response.data.myInfo);
                 setLoading(false)
             })
 
@@ -33,5 +43,5 @@ export const useFetchColumns = ()=>{
                 setLoading(false);
             })
     },[])
-    return({loading, columns})
+    return({loading, columns, myInfo})
 }

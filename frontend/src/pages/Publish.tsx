@@ -1,9 +1,9 @@
-import { AppBar } from "../components/AppBar"
+// import { AppBar } from "../components/AppBar"
 
 export const Publish = () => {
     return (
         <div>
-            <AppBar />
+            {/* <AppBar /> */}
 
             <div className="flex justify-center">
                 <div className="w-full ">
@@ -20,7 +20,7 @@ export const Publish = () => {
                                     <textarea className="w-full px-4 py-2 text-sm text-gray-900 bg-white border-0" placeholder="Enter your story" required ></textarea>
                                 </div>
                             </div>
-                            
+
                             <button type="submit" className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200  hover:bg-blue-800">
                                 Publish
                             </button>

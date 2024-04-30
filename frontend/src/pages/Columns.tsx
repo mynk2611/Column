@@ -3,31 +3,35 @@ import { Column } from "../components/ColumnCard"
 import { useFetchColumns } from "../hooks/useFetchColumns"
 
 export const Columns = () => {
-    const {loading, columns } = useFetchColumns();
+    const { loading, columns, myInfo } = useFetchColumns();
 
-    if(loading){
-        return(
-        <div>
-            Loading...
-        </div>
+    if (loading) {
+        return (
+            <div>
+                Loading...
+            </div>
         )
     }
 
     return (
         <div>
-            <div>
-                <AppBar />
-            </div>
-            <div>
-                {columns.map(column => 
-                    <Column
-                        author_name={column.user.name}
-                        title={column.title}
-                        content={column.content}
-                        id = {column.id}
-                    />
-                    )}   
-            </div>
+            {myInfo ? (
+                <div>
+                    <AppBar author_name={myInfo.name} />
+                    <div>
+                        {columns.map(column =>
+                            <Column
+                                author_name={column.user.name}
+                                title={column.title}
+                                content={column.content}
+                                id={column.id}
+                            />
+                        )}
+                    </div>
+                </div>
+            ) : (
+                <div>No user info available</div>
+            )}
         </div>
     )
 }
