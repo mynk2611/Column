@@ -141,6 +141,19 @@ column.use('/*', async(c, next)=>{
         const authorId = c.get('userId')
 
         try{
+
+            const myInfo = await prisma.column_User.findFirst({
+                where : {
+                    id : authorId 
+                },
+                select : {
+                    id : true,
+                    name : true,
+                    email : true,
+                    bio : true
+                }
+            })
+
             const columns = await prisma.column.findMany({
                 select : {
                     id : true,
@@ -155,7 +168,7 @@ column.use('/*', async(c, next)=>{
             })
 
             return c.json({
-                columns
+                columns, myInfo 
             })
         }
         catch(error){
