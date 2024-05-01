@@ -184,7 +184,7 @@ column.use('/*', async(c, next)=>{
     //     const prisma = c.get('prisma')
     // })
 
-    column.post('/:id', async (c) => {
+    column.get('/:id', async (c) => {
         const prisma = c.get('prisma')
         const authorId = c.get('userId');
 

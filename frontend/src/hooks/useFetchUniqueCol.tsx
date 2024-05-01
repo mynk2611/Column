@@ -19,7 +19,7 @@ export const useFetchUniqueCol = ({id} : {id : string})=>{
 
     useEffect(()=>{
         const token = JSON.parse(localStorage.getItem("token") || "{}") 
-        axios.post(`${BACKEND_URL}/api/v1/column/${id}`,{},
+        axios.get(`${BACKEND_URL}/api/v1/column/${id}`,
         {
             headers : {
                 Authorization : token
