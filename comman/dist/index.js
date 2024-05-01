@@ -20,11 +20,12 @@ exports.signupSchema = zod_1.default.object({
         .regex(/[1-9]/, { message: "Password must contain at least one number" }),
     bio: zod_1.default.string()
         .trim()
-        .max(100, { message: "Bio must be 100 characters or fewer" })
+        .max(500, { message: "Bio must be 500 characters or fewer" })
         .default("No bio provided")
 });
 exports.loginSchema = zod_1.default.object({
     email: zod_1.default.string()
+        .trim()
         .email({ message: "Invalid email address" }),
     password: zod_1.default.string()
         .min(8, { message: "Password must be at least 8 characters long" })
@@ -35,17 +36,17 @@ exports.loginSchema = zod_1.default.object({
 exports.columnSchema = zod_1.default.object({
     title: zod_1.default.string()
         .trim()
-        .max(50, { message: "title must be 50 character or fewer" }),
+        .max(500, { message: "title must be 500 character or fewer" }),
     content: zod_1.default.string()
         .trim()
-        .max(200, { message: "Content must be 200 charater of fewer" }),
+        .max(5000, { message: "Content must be 5000 charater of fewer" }),
 });
 exports.updateColumnSchema = zod_1.default.object({
     id: zod_1.default.string(),
     title: zod_1.default.string()
         .trim()
-        .max(50, { message: "title must be 50 character or fewer" }),
+        .max(500, { message: "title must be 500 character or fewer" }),
     content: zod_1.default.string()
         .trim()
-        .max(200, { message: "Content must be 200 charater of fewer" }),
+        .max(5000, { message: "Content must be 5000 charater of fewer" }),
 });
