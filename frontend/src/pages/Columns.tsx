@@ -17,7 +17,7 @@ export const Columns = () => {
         <div>
             {myInfo ? (
                 <div>
-                    <AppBar author_name={myInfo.name} />
+                    <AppBar  />
                     <div>
                         {columns.map(column =>
                             <Column

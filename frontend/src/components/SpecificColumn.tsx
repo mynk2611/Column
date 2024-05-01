@@ -4,7 +4,7 @@ import { AppBar } from "./AppBar"
 export const SpecificColumn = ({ column }: { column: uniCol }) => {
     return (
         <div>
-            <AppBar author_name={column.user.name}/>
+            <AppBar />
             <div className="flex justify-center">
                 <div className="grid grid-cols-12 px-5 mt-9 max-w-screen-xl">
                         <div className="col-span-8 ">

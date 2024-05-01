@@ -1,9 +1,10 @@
-// import { AppBar } from "../components/AppBar"
+import { AppBar } from "../components/AppBar"
 
 export const Publish = () => {
+
     return (
         <div>
-            {/* <AppBar /> */}
+            <AppBar />
 
             <div className="flex justify-center">
                 <div className="w-full ">

@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom"
+import { useAuthor } from "../contexts/AuthorContext"
 
 // interface propAppBar {
 //     author_name : string;
 // }
 
-export const AppBar = ({author_name} : {author_name : string}) => {
+export const AppBar = () => {
+    const {authorName} = useAuthor();
     return (
         <div className="border-b border-gray-300 mb-4">
             <div className="flex justify-between mt-5 mb-3">
@@ -32,7 +34,7 @@ export const AppBar = ({author_name} : {author_name : string}) => {
                     </div>
                     <div className="flex flex-col justify-center">
                         <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-xl font-medium cursor-pointer">
-                            {author_name[0]}
+                            {authorName[0]}
                         </div>
                     </div>
                 </div>
