@@ -4,6 +4,7 @@ import { Login } from "./pages/Login"
 import { Columns } from "./pages/Columns"
 import { UniqueCol } from "./pages/UniqueCol"
 import { Publish } from "./pages/Publish"
+import { MyProfile } from "./pages/MyProfile"
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
             <Route path="/bulk" element={<Columns />}/>
             <Route path="/column/:id" element={<UniqueCol/>} />
             <Route path="/publish" element={<Publish />} />
+            <Route path="/my-profile" element={<MyProfile/>} />
         </Routes>
     </BrowserRouter>
   )
