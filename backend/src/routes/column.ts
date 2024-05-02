@@ -180,6 +180,41 @@ column.use('/*', async(c, next)=>{
         }
     })
 
+    column.get('/my-profile', async(c)=>{
+        const prisma = c.get('prisma');
+        const authorId = c.get('userId');
+
+        try {
+            const myColumns = await prisma.column.findMany({
+                where : {
+                    author_id : authorId,
+                },
+                select : {
+                    id : true,
+                    title : true,
+                    content : true,
+                    user : {
+                        select : {
+                            name : true,
+                            bio : true
+                        }
+                    }
+                }
+            })
+
+            return c.json({
+                myColumns
+            })
+        }
+        catch(error){
+            console.log(`Error while fetching columns`, error)
+            c.status(500)
+            return c.json({
+                message : "Internal server error"
+            })
+        }
+    })
+
     // column.post('/:author-name', async (c) => {
     //     const prisma = c.get('prisma')
     // })
@@ -217,6 +252,46 @@ column.use('/*', async(c, next)=>{
             c.status(411)
             return c.json({
                 message : "Internal server error"
+            })
+        }
+    })
+
+    column.delete("/:id", async(c)=>{
+        const prisma = c.get("prisma");
+        const authorId = c.get("userId");
+
+        const targetId = c.req.param("id");
+
+        try{
+            const existingColumn = await prisma.column.findFirst({
+                where : {
+                    id : targetId,
+                    author_id : authorId,
+                }
+            })
+
+            if(!existingColumn){
+                c.status(404);
+                return c.json({
+                    message : "Column not found",
+                })
+            }
+
+            await prisma.column.delete({
+                where : {
+                    id : targetId,
+                }
+            })
+
+            return c.json({
+                message : "Column deleted successfully"
+            })
+        }
+        catch(error){
+            console.log(`Error while deleting the column `, error);
+            c.status(500)
+            return c.json({
+                message : "Internal server error",
             })
         }
     })
