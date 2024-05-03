@@ -8,7 +8,7 @@ import { useAuthor } from "../contexts/AuthorContext"
 export const AppBar = () => {
     const {authorName} = useAuthor();
     return (
-        <div className="border-b border-gray-300 mb-4">
+        <div className="border-b border-gray-100 mb-4">
             <div className="flex justify-between mt-5 mb-3">
 
                 <div className="flex flex-col justify-center">
