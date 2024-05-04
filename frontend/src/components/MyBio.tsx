@@ -1,19 +1,17 @@
 import { Link } from "react-router-dom";
 import { myInfoGen } from "../hooks/useFetchColumns";
-import { myColumnsGen } from "../hooks/useFetchProfile"
 
 interface MyBioProp {
-    myColumns : myColumnsGen[];
     myInfo : myInfoGen
 }
 
-export const MyBio = ({myColumns, myInfo}: MyBioProp ) => {
+export const MyBio = ({myInfo}: MyBioProp ) => {
 
     return (
         <div className="mt-10">
         <div className="flex justify-normal border-b border-gray-200">
             <div className="py-3 mx-2 ">
-                <Link to={"/my-profile/columns"}>
+                <Link to={"/my-profile"}>
                     Columns
                 </Link>
             </div>
