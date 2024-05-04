@@ -30,7 +30,7 @@ export const MyProfileColumn = () => {
                                 {myInfo.name[0]}
                                 </div>
 
-                                <div className="text-lg font-medium mt-3 ml-2">
+                                <div className="text-lg font-medium mt-3 ml-2 min-w-80">
                                     {myInfo.name}
                                 </div>
                             </div>
