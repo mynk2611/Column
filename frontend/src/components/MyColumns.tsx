@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { myColumnsGen } from "../hooks/useFetchProfile"
 import { myInfoGen } from "../hooks/useFetchColumns";
 import { ProfileColumnCard } from "./ProfileColumnCard";
+import { useState } from "react";
 
 interface MyColumnProp {
     myColumns : myColumnsGen[];
@@ -9,9 +10,15 @@ interface MyColumnProp {
 }
 
 export const MyColumns = ({myColumns, myInfo}: MyColumnProp) => {
+    const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
+    
+    const handleDropdownToggle = (id: string) =>{
+        setActiveDropdownId( activeDropdownId === id ? null : id);
+    }
+
     return (
         <div className="mt-10">
-            <div className="flex justify-normal border-b border-gray-100">
+            <div className="flex justify-normal border-b border-gray-200">
                 <div className="py-5 mx-2 border-b-2 border-black">
                     <Link to={"/my-profile"}>
                         Columns
@@ -27,7 +34,12 @@ export const MyColumns = ({myColumns, myInfo}: MyColumnProp) => {
 
             <div>
                 {myColumns.map(myColumn=>(
-                    <ProfileColumnCard  myColumn={myColumn} myInfo={myInfo}/>
+                    <ProfileColumnCard  
+                    myColumn={myColumn} 
+                    myInfo={myInfo}
+                    isDropdownOpen={activeDropdownId===myColumn.id}
+                    onDropdownToggle={handleDropdownToggle}
+                    />
                 ))}
             </div>
 

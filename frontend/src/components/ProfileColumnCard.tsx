@@ -1,13 +1,19 @@
 import { Link } from "react-router-dom";
 import { myInfoGen } from "../hooks/useFetchColumns";
 import { myColumnsGen } from "../hooks/useFetchProfile"
+import { useDeleteColumn } from "../hooks/useDeleteColumn";
 
 interface ProfileColumnCardProp {
     myColumn : myColumnsGen;
-    myInfo : myInfoGen
+    myInfo : myInfoGen;
+    isDropdownOpen : boolean;
+    onDropdownToggle : (id:string) => void;
 }
 
-export const ProfileColumnCard = ({myColumn, myInfo}: ProfileColumnCardProp )=>{
+export const ProfileColumnCard = ({myColumn, myInfo, isDropdownOpen, onDropdownToggle}: ProfileColumnCardProp )=>{
+    const deleteColumn= useDeleteColumn();
+    
+
     return(
     <div className="mt-6">
         <div className="w-full p-4 border-b border-gray-200 shadow shadow-gray-500/50">
@@ -34,11 +40,21 @@ export const ProfileColumnCard = ({myColumn, myInfo}: ProfileColumnCardProp )=>{
 
                     <div>
                         <button 
-                            onClick={()=>{}} className="p-2  hover:bg-gray-100 rounded-full transition-colors duration-300 focus:outline-none">
+                            onClick={()=>onDropdownToggle(myColumn.id)} className="p-2  hover:bg-gray-100 rounded-full transition-colors duration-300 focus:outline-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" className="w-6 h-6 stroke-current text-gray-600 hover:text-gray-800 transition-colors duration-300">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
                                 </svg>
                         </button>
+
+                        { isDropdownOpen && (
+                             <div className="absolute  w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
+                             <button className="text-gray-700 block w-full text-left px-4 py-2 text-sm hover:bg-gray-100" onClick={() => deleteColumn(myColumn.id)}>
+                                 Delete 
+                             </button>
+                         </div>
+                        )
+
+                        }
                     </div>
                 </div>
 
