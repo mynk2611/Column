@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
-import { useFetchColumns } from "../hooks/useFetchColumns";
+import { useFetchMyInfo } from "../hooks/useFetchMyInfo";
 
 type AuthorContextType = {
     authorName : string;
@@ -15,7 +15,7 @@ export const useAuthor = ()=>{
 }
 
 export const AuthorProvider = ({children} : {children : ReactNode})=>{
-    const {myInfo} = useFetchColumns();
+    const myInfo = useFetchMyInfo();
     const [authorName, setAuthorName] = useState<string>('');
 
     useEffect(() => {
