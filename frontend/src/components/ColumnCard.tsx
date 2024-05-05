@@ -9,12 +9,17 @@ interface columnThing {
     onDropdownToggle: (id: string) => void;
 }
 
-export const Column = ({ author_name, title, content, id, isDropdownOpen, onDropdownToggle }: columnThing) => {
+export const Column : React.FC<columnThing> = ({ author_name, title, content, id, isDropdownOpen, onDropdownToggle }) => {
     
+    const handleButtonClick = (event : React.MouseEvent<HTMLButtonElement>)=>{
+        event.preventDefault();
+        onDropdownToggle(id);
+    }
 
     return (
         <div className="flex justify-center">
             <div className="w-full max-w-4xl p-4 border-b border-gray-200 shadow-md shadow-gray-500/50">
+            <Link to={`/column/${id}`}>
                 <div className="flex justify-between">
                     <div className="flex">
                         <div className="w-8 h-8 rounded-full flex items-center justify-center bg-slate-200">
@@ -38,7 +43,7 @@ export const Column = ({ author_name, title, content, id, isDropdownOpen, onDrop
 
                     <div>
                         <button 
-                            onClick={()=>onDropdownToggle(id)} className="p-2  hover:bg-gray-100 rounded-full transition-colors duration-300 focus:outline-none">
+                            onClick={handleButtonClick} className="p-2  hover:bg-gray-100 rounded-full transition-colors duration-300 focus:outline-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" className="w-6 h-6 stroke-current text-gray-600 hover:text-gray-800 transition-colors duration-300">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
                                 </svg>
@@ -56,7 +61,7 @@ export const Column = ({ author_name, title, content, id, isDropdownOpen, onDrop
                     </div>
                 </div>
 
-                <Link to={`/column/${id}`}>
+                
                     <div className="text-2xl font-bold mt-2">
                         {title}
                     </div>
