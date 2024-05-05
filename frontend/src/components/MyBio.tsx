@@ -10,13 +10,13 @@ export const MyBio = ({myInfo}: MyBioProp ) => {
     return (
         <div className="mt-10">
         <div className="flex justify-normal border-b border-gray-200">
-            <div className="py-3 mx-2 ">
+            <div className="py-2 mx-2 ">
                 <Link to={"/my-profile"}>
                     Columns
                 </Link>
             </div>
 
-            <div className="py-3 mx-4 border-b-2 border-black">
+            <div className="py-2 mx-4 border-b-2 border-black">
                 <Link to={"/my-profile/about"}>
                     Bio
                 </Link>

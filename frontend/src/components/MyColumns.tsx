@@ -19,20 +19,20 @@ export const MyColumns = ({myColumns, myInfo}: MyColumnProp) => {
     return (
         <div className="mt-10">
             <div className="flex justify-normal border-b border-gray-200">
-                <div className="py-5 mx-2 border-b-2 border-black">
+                <div className="py-2 mx-2 border-b-2 border-black">
                     <Link to={"/my-profile"}>
                         Columns
                     </Link>
                 </div>
 
-                <div className="py-5 mx-2">
+                <div className="py-2 mx-2">
                     <Link to={"/my-profile/about"}>
                         Bio
                     </Link>
                 </div>
             </div>
 
-            <div>
+            <div className="mt-10">
                 {myColumns.map(myColumn=>(
                     <ProfileColumnCard  
                     myColumn={myColumn} 
