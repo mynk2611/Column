@@ -180,6 +180,36 @@ column.use('/*', async(c, next)=>{
         }
     })
 
+    column.get('/my-data', async(c)=>{
+        const prisma = c.get('prisma');
+        const authorId = c.get('userId');
+
+        try{
+            const myInfo = await prisma.column_User.findFirst({
+                where : {
+                    id : authorId 
+                },
+                select : {
+                    id : true,
+                    name : true,
+                    email : true,
+                    bio : true
+                }
+            }) 
+
+            return c.json({
+                myInfo
+            })
+        }
+        catch(error){
+            console.log(`Error while fetching myInfo`, error);
+            c.status(500)
+            return c.json({
+                message : "Internal server error"
+            })
+        }
+     })
+
     column.get('/my-profile', async(c)=>{
         const prisma = c.get('prisma');
         const authorId = c.get('userId');
