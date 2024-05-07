@@ -59,7 +59,10 @@ export const AppBar = () => {
                     </button>
                     {
                         activeDropdownStatus && (
-                            <div className="absolute top-10 left-16 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
+                            <>
+                            <div className="absolute top-10 h-3 w-3 left-44 translate-y-2 rotate-45 bg-white shadow-[rgba(0,0,15,0.5)_-1px_1px_20px_1px] " />
+                            
+                            <div className="absolute top-14 left-16 -translate-y-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
                                 
 
                                 <button role="menuitem" onClick={Logout}
@@ -74,7 +77,7 @@ export const AppBar = () => {
                                     </p>
                                 </button>
                             </div>
-                            
+                            </>
                         )
                     }
 

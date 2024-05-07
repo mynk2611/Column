@@ -44,7 +44,7 @@ export const ProfileColumnCard: React.FC<ProfileColumnCardProp> = ({ myColumn, m
                             </div>
                         </div>
 
-                        <div>
+                        <div className="relative">
                             <button
                                 onClick={handleButtonClick} className="p-2  hover:bg-gray-100 rounded-full transition-colors duration-300 focus:outline-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" className="w-6 h-6 stroke-current text-gray-600 hover:text-gray-800 transition-colors duration-300">
@@ -53,11 +53,16 @@ export const ProfileColumnCard: React.FC<ProfileColumnCardProp> = ({ myColumn, m
                             </button>
 
                             {isDropdownOpen && (
-                                <div className="absolute  w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
-                                    <button className="text-gray-700 block w-full text-left px-4 py-2 text-sm hover:bg-gray-100" onClick={() => deleteColumn(myColumn.id)}>
-                                        Delete
-                                    </button>
-                                </div>
+                                <>
+                                    <div className="absolute  h-3 w-3 left-1/2 -translate-x-1 -translate-y-1 rotate-45 bg-white shadow-[rgba(0,0,15,0.5)_-1px_1px_20px_1px] z-0 " />
+
+                                    <div className="absolute left-1/2 -translate-x-1/2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-20">
+
+                                        <button className="text-gray-700 block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 pl-7" onClick={() => deleteColumn(myColumn.id)}>
+                                            Delete
+                                        </button>
+                                    </div>
+                                </>
                             )
 
                             }
