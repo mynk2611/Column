@@ -2,13 +2,19 @@ import { AppBar } from "../components/AppBar"
 import { useFetchProfile } from "../hooks/useFetchProfile"
 import { MyName } from "../components/MyName";
 import { MyBio } from "../components/MyBio";
+import { MyProfileAboutSkeleton } from "../skeletons/MyProfileAboutSkeleton";
 
 export const MyProfileAbout = () => {
     const { loading, myInfo } = useFetchProfile();
 
     if (loading) {
         return (
-            <div>Loading...</div>
+            <div>
+                <AppBar/>
+                <div>
+                    <MyProfileAboutSkeleton/>
+                </div>
+            </div>
         )
     }
     return (
