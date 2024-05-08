@@ -2,13 +2,19 @@ import { AppBar } from "../components/AppBar"
 import { useFetchProfile } from "../hooks/useFetchProfile"
 import { MyName } from "../components/MyName";
 import { MyColumns } from "../components/MyColumns";
+import { MyprofileSkeleton } from "../skeletons/MyProfileSkeleton";
 
 export const MyProfileColumn = () => {
     const { loading, myColumns, myInfo } = useFetchProfile();
 
     if (loading) {
         return (
-            <div>Loading...</div>
+        <div>
+            <AppBar/>
+            <div>
+                <MyprofileSkeleton />
+            </div>
+        </div>
         )
     }
     return (
@@ -45,17 +51,3 @@ export const MyProfileColumn = () => {
     )
 }
 
-
-{/* {
-    myInfo?(
-        <div>
-        <div>
-        {myColumns.map(myColumn =>(
-            <SpecificProfile myInfo={myInfo} myColumn={myColumn}/>
-            ))}
-            </div>
-            </div >
-        ): (
-            <div>no info available</div>
-        )}
-        </div> */}
