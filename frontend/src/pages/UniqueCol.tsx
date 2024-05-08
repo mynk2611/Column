@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom"
 import { useFetchUniqueCol } from "../hooks/useFetchUniqueCol";
 import { SpecificColumn } from "../components/SpecificColumn";
+import { AppBar } from "../components/AppBar";
+import { SpecificColumnSkeleton } from "../components/SpecificColumnSkeleton";
 
 export const UniqueCol = ()=>{
     const {id} = useParams();
@@ -9,15 +11,23 @@ export const UniqueCol = ()=>{
     })
 
     if(loading){
+        return(
     <div>
-        loading...
+        <AppBar/>
+        <div>
+            <SpecificColumnSkeleton />
+        </div>
     </div>
+    )
     }
 
     if(!uniCol){
         return (
-        <div>
-            no data found
+            <div>
+            <AppBar/>
+            <div>
+                <SpecificColumnSkeleton />
+            </div>
         </div>
         )
     }
