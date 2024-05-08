@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AppBar } from "../components/AppBar"
 import { Column } from "../components/ColumnCard"
 import { useFetchColumns } from "../hooks/useFetchColumns"
+import { ColumnSkeleton } from "../components/ColumnsSkeleton";
 
 export const Columns = () => {
     const { loading, columns, myInfo } = useFetchColumns();
@@ -14,7 +15,13 @@ export const Columns = () => {
     if (loading) {
         return (
             <div>
-                Loading...
+                <AppBar/>
+                <div>
+                    <ColumnSkeleton />
+                    <ColumnSkeleton />
+                    <ColumnSkeleton />
+                    <ColumnSkeleton />
+                </div>
             </div>
         )
     }
