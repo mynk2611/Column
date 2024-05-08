@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AppBar } from "../components/AppBar"
 import { Column } from "../components/ColumnCard"
 import { useFetchColumns } from "../hooks/useFetchColumns"
-import { ColumnSkeleton } from "../components/ColumnsSkeleton";
+import { ColumnSkeleton } from "../skeletons/ColumnsSkeleton";
 
 export const Columns = () => {
     const { loading, columns, myInfo } = useFetchColumns();

@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import { useFetchUniqueCol } from "../hooks/useFetchUniqueCol";
 import { SpecificColumn } from "../components/SpecificColumn";
 import { AppBar } from "../components/AppBar";
-import { SpecificColumnSkeleton } from "../components/SpecificColumnSkeleton";
+import { SpecificColumnSkeleton } from "../skeletons/SpecificColumnSkeleton";
 
 export const UniqueCol = ()=>{
     const {id} = useParams();
